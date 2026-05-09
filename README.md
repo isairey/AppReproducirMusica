@@ -1,84 +1,380 @@
-# Stratus Sound [![Build Status](https://travis-ci.com/mallorybulkley/stratus-sound.svg?branch=master)](https://travis-ci.com/mallorybulkley/stratus-sound)
-[Stratus Sound live][heroku]
+<div align="center">
 
-[heroku]: http://stratus-sound.herokuapp.com/
+<img width="150" src="https://github.com/isairey.png" />
 
-Stratus Sound is a single-page, full stack web application for streaming and sharing music. It utilizes Ruby on Rails with a PostgreSQL database on the backend, and React.js and Redux on the frontend.
+# ☁️ Stratus Sound
 
-![Stratus Sound stream](./docs/images/stream.png)
+### Plataforma full stack de streaming musical 🎵
 
+<p align="center">
+  Stratus Sound es una aplicación web moderna de streaming y compartición de música desarrollada con <b>Ruby on Rails</b>, <b>React</b> y <b>Redux</b>, inspirada en plataformas musicales profesionales.
+</p>
 
-### Features
-* Upload, edit, delete and view tracks using the RESTful API
-* Create and add songs to playlists
-* Continuous track playback
-* Comment on tracks
-* View play counts for each track
-* Search for users, tracks and playlists
-* See all of a user's tracks and playlists on their page
-* Secure account creation and login
-* See waveform visualizations for each song
-* Infinite scroll
+<p align="center">
+  <img src="https://img.shields.io/badge/Ruby%20on%20Rails-FullStack-red?style=for-the-badge&logo=rubyonrails">
+  <img src="https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react">
+  <img src="https://img.shields.io/badge/PostgreSQL-Database-336791?style=for-the-badge&logo=postgresql">
+  <img src="https://img.shields.io/badge/Open%20Source-Yes-brightgreen?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/isairey/StratusSound?style=for-the-badge">
+  <img src="https://img.shields.io/github/forks/isairey/StratusSound?style=for-the-badge">
+</p>
 
-### Technologies used
-* React.js
-* Redux
-* BCrypt (for user authorization)
-* Paperclip (for storing audio files and images with Amazon Web Services)
-* figaro (for securely storing keys and other sensitive info)
-* pg_search
+<p align="center">
+  <a href="#-preview">Preview</a> •
+  <a href="#-características">Características</a> •
+  <a href="#-tecnologías-utilizadas">Tecnologías</a> •
+  <a href="#-instalación">Instalación</a> •
+  <a href="#-roadmap">Roadmap</a>
+</p>
 
-## Features & Implementation
+</div>
 
-### Audio Waveforms
-![Stratus Sound track](./docs/images/track_show.png)
+---
 
-Waveform visualizations are shown for each track. The first time a track is viewed, the audio file is asynchronously decoded. After the audio is decoded, sample points of the resulting `AudioBuffer`'s `channelData` are extracted and used to draw the waveform on a Canvas element. The audio peaks are drawn to demonstrate the changes in sound pressure throughout the track. Finally, since extracting the peaks from an `AudioBuffer` is a time consuming process, the array of audio peaks is saved to the database as a JSON string. Upon subsequent renders of the track, the audio peaks data is simply retrieved from the database and the waveform draws instantly without having to re-process the audio data.
+# 🌊 Acerca de Stratus Sound
 
-```javascript
-let request = new XMLHttpRequest();
-request.open('GET', this.props.track.audio_url, true);
-request.responseType = 'arraybuffer';
+**Stratus Sound** es una plataforma musical full stack diseñada para streaming, reproducción y compartición de música online.
 
-request.addEventListener('load', () => {
-  let context = window.audioContext;
+La aplicación utiliza una arquitectura moderna con:
 
-  context.decodeAudioData(request.response).then((buffer) => {
-    let channelData = buffer.getChannelData(0);
-    let peaks = this.extractPeaks(channelData);
-    this.props.savePeaks({ id: this.props.track.id, peaks: peaks });
-  })
-});
-request.send();
+- ⚙️ Backend en Ruby on Rails
+- 🗄️ PostgreSQL como base de datos
+- ⚡ Frontend dinámico con React + Redux
+
+El proyecto ofrece reproducción continua, playlists, visualización de waveforms y una experiencia musical moderna inspirada en plataformas premium.
+
+---
+
+# 📸 Preview
+
+<div align="center">
+
+<img src="./docs/images/stream.png" width="1000"/>
+
+</div>
+
+---
+
+# ✨ Características
+
+# 🎧 Streaming Musical
+
+- ▶️ Reproducción de música online
+- ⏯️ Play / Pause
+- ⏭️ Next / Previous
+- 🔁 Reproducción continua
+- 🎵 Cola dinámica de canciones
+- 🔊 Audio streaming optimizado
+
+---
+
+# 🎼 Gestión Musical
+
+- ⬆️ Subida de canciones
+- ✏️ Edición de tracks
+- 🗑️ Eliminación de canciones
+- 📂 Gestión de playlists
+- 🎤 Perfil de artistas
+- 📊 Contador de reproducciones
+
+---
+
+# 🔍 Búsqueda Inteligente
+
+- 🔎 Búsqueda de canciones
+- 👤 Búsqueda de usuarios
+- 📜 Búsqueda de playlists
+- ⚡ pg_search con búsqueda avanzada
+- 🎯 Coincidencias parciales inteligentes
+
+---
+
+# 🌊 Audio Waveforms
+
+<div align="center">
+
+<img src="./docs/images/track_show.png" width="900"/>
+
+</div>
+
+- 📈 Visualización dinámica de audio
+- 🎨 Waveforms generados en Canvas
+- ⚡ Renderizado optimizado
+- 💾 Caché de peaks en base de datos
+- 🎵 Sincronización multimedia
+
+---
+
+# 🎶 Playlists & Queue
+
+<div align="center">
+
+<img src="./docs/images/user.gif" width="900"/>
+
+</div>
+
+- 📂 Creación de playlists
+- ❤️ Organización de canciones favoritas
+- 🔄 Queue automática
+- ⚡ Cambio fluido entre canciones
+- 🎵 Reproducción continua entre páginas
+
+---
+
+# 💬 Comunidad
+
+- 💭 Comentarios en canciones
+- 👥 Sistema de usuarios
+- 🔒 Login seguro
+- 🛡️ Autenticación protegida
+
+---
+
+# 🎥 Playback System
+
+<div align="center">
+
+<img src="./docs/images/playbar.gif" width="1000"/>
+
+</div>
+
+- 🎵 HTML5 Audio Engine
+- ⌨️ Controles multimedia
+- 🔊 Sincronización global
+- 🎚️ Barra interactiva
+- 🎧 Playback persistente
+
+---
+
+# 🛠️ Tecnologías Utilizadas
+
+## ⚙️ Backend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=rails,postgresql" />
+</p>
+
+- Ruby on Rails
+- PostgreSQL
+- RESTful API
+- BCrypt
+- pg_search
+
+---
+
+## 🎨 Frontend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=react,redux,javascript,html,css" />
+</p>
+
+- React.js
+- Redux
+- JavaScript
+- HTML5
+- CSS3
+
+---
+
+## ☁️ Multimedia & Cloud
+
+- Amazon Web Services
+- Paperclip
+- Audio Streaming APIs
+- HTML5 Audio
+- Canvas API
+
+---
+
+## 🧰 Herramientas
+
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github,heroku,vscode" />
+</p>
+
+- Git & GitHub
+- Heroku
+- VS Code
+- npm
+- Webpack
+
+---
+
+# 📂 Estructura del Proyecto
+
+```bash
+StratusSound/
+│
+├── app/                    # Backend Rails
+├── frontend/
+│   ├── components/         # Componentes React
+│   ├── actions/            # Redux actions
+│   ├── reducers/           # Redux reducers
+│   ├── middleware/         # Middleware
+│   └── util/               # Utilidades
+│
+├── docs/images/            # Capturas y GIFs
+├── db/                     # PostgreSQL
+└── README.md
 ```
 
-### Music Playback
-![Stratus Sound playbar](./docs/images/playbar.gif)
+---
 
-When a user clicks a track to play, a `Playbar` component is rendered. This component fetches the audio file (hosted with Amazon Web Services) and begins playback using a simple HTML5 audio element. The `Controller` component located within the `Playbar` allow users to pause, play, loop, restart and skip tracks. The current track and the song queue are stored in the app's state, allowing the user to navigate through the app with continuous audio playback. Users are also able to control the current song's play/pause state using the space bar, or by clicking any of the play buttons or waveforms throughout the app. All of these buttons are kept in sync with the currently playing track through the Redux `store`, maintaining a predictable experience for the user.
+# ⚡ Instalación
 
-```javascript
-<audio id='audio' autoPlay preload="auto" type="audio/mpeg"
-  src={ track.audio_url }
-  ref={ tag => this.audioTag = tag }
-  onTimeUpdate={ this.updateProgress.bind(this) }
-  onEnded={ this.playNextTrack.bind(this) } />
+## 1️⃣ Clonar el repositorio
+
+```bash
+git clone https://github.com/isairey/StratusSound.git
+cd StratusSound
 ```
 
-### Playlists and the Play Queue
-![Stratus Sound users](./docs/images/user.gif)
+---
 
-Users are also able to browse and create playlists to store their favorite tracks. When playing music from a playlist, user page, or the Stream homepage, a play queue is generated and stored in the app's state. At the end of the current track, or if the user presses the skip button, the next track in the queue is played. The audio url is stored along with the songs in the queue so it does not need to be fetched from the database, allowing for a faster, smoother listening experience.
+# 🔥 Requisitos
 
-The playlists are organized using a `playlist_tracks` table in the database, which connects each Track to many playlists and each Playlist to many tracks. When a new playlist is created from a track's page, that track is automatically added to the playlist. If a playlist's last track is removed, the playlist itself is deleted.
+- Ruby 3+
+- Rails
+- PostgreSQL
+- Node.js
+- npm
+- Yarn
 
+---
 
-## Future Plans
-### Improved search
-Stratus Sound currently uses pg_search to allow users to search for tracks, users and playlists at the same time. The search is configured to use both full text and trigram search, meaning that close/partial matches will also be returned as results. I plan to implement custom `pg_search_scope`s for Tracks to also allow search by genre and descriptions.
+# ▶️ Ejecutar Proyecto
 
-### Following
-I plan to allow users to follow their favorite users. The **Stream** will then reflect updates from followed users, while a separate **Discover** feed will allow users to explore and find tracks from other users.
+## Instalar dependencias backend
 
-### ~~Pagination / infinite scroll~~ Completed
-~~Currently viewing your stream will show all tracks on one page. However, with a larger number of tracks, this will cause the app to become too slow. I plan to implement pagination or infinite scroll to load data in more manageable batches.~~
+```bash
+bundle install
+```
+
+---
+
+## Instalar frontend
+
+```bash
+npm install
+```
+
+---
+
+## Configurar base de datos
+
+```bash
+rails db:create
+rails db:migrate
+```
+
+---
+
+## Ejecutar servidor
+
+```bash
+rails server
+```
+
+---
+
+# 🚀 Funcionalidades Completadas
+
+## ✅ Implementado
+
+- 🎵 Streaming online
+- 📂 Playlists
+- 🌊 Audio Waveforms
+- 💬 Comentarios
+- 🔎 Búsqueda avanzada
+- 🔄 Playback continuo
+- 📊 Contador de reproducciones
+- ♾️ Infinite Scroll
+
+---
+
+# 📊 Roadmap
+
+## 🚧 Próximamente
+
+- 👥 Sistema de followers
+- 🎯 Feed personalizado
+- 🌍 Discover page
+- ❤️ Likes y favoritos
+- 🎶 Recomendaciones inteligentes
+- 📱 Aplicación móvil
+- 🤖 Sistema IA musical
+
+---
+
+# 🤝 Contribuciones
+
+Las contribuciones son bienvenidas ❤️
+
+## Pasos para contribuir
+
+1. Haz Fork del proyecto
+2. Crea una rama
+
+```bash
+git checkout -b feature/nueva-funcion
+```
+
+3. Realiza tus cambios
+4. Haz commit
+
+```bash
+git commit -m "✨ Nueva funcionalidad"
+```
+
+5. Haz push
+
+```bash
+git push origin feature/nueva-funcion
+```
+
+6. Abre un Pull Request 🚀
+
+---
+
+# 👨‍💻 Autor
+
+<div align="center">
+
+<img src="https://github.com/isairey.png" width="120" style="border-radius:50%" />
+
+## Isai Reyes
+
+Desarrollador Full Stack apasionado por plataformas multimedia, streaming y aplicaciones modernas.
+
+</div>
+
+---
+
+# 🌟 Apoya el Proyecto
+
+Si te gusta Stratus Sound:
+
+⭐ Dale una estrella al repositorio  
+🍴 Haz Fork del proyecto  
+📢 Compártelo con otros desarrolladores
+
+---
+
+# 📜 Licencia
+
+Este proyecto está bajo la licencia **MIT**.
+
+---
+
+# ⚠️ Disclaimer
+
+> Stratus Sound utiliza servicios multimedia únicamente con fines educativos y tecnológicos.
+> Todos los derechos del contenido pertenecen a sus respectivos propietarios.
+
+---
+
+<div align="center">
+
+### ☁️ Stratus Sound — Streaming moderno con tecnología full stack.
+
+</div>
