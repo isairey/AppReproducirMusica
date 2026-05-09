@@ -15,8 +15,8 @@
   <img src="https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react">
   <img src="https://img.shields.io/badge/PostgreSQL-Database-336791?style=for-the-badge&logo=postgresql">
   <img src="https://img.shields.io/badge/Open%20Source-Yes-brightgreen?style=for-the-badge">
-  <img src="https://img.shields.io/github/stars/isairey/StratusSound?style=for-the-badge">
-  <img src="https://img.shields.io/github/forks/isairey/StratusSound?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/isairey/AppReproducirMusica?style=for-the-badge">
+  <img src="https://img.shields.io/github/forks/isairey/AppReproducirMusica?style=for-the-badge">
 </p>
 
 <p align="center">
@@ -225,8 +225,8 @@ StratusSound/
 ## 1️⃣ Clonar el repositorio
 
 ```bash
-git clone https://github.com/isairey/StratusSound.git
-cd StratusSound
+git clone https://github.com/isairey/AppReproducirMusica.git
+cd AppReproducirMusica
 ```
 
 ---
